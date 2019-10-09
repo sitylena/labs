@@ -34,17 +34,35 @@ import numpy
 #
 # plt.show()
 
+elements_number = 1000
+
 my_poisson = poisson(5)
-viborka = my_poisson.rvs(size=1000)
+viborka = my_poisson.rvs(size=elements_number)
 
 x = numpy.linspace(0, 12, 13)
 
 num_in_viborka = []
 for x1 in x:
-    num_in_viborka.append(len(list(filter(lambda n: n == x1, viborka.tolist())))/1000)
+    num_in_viborka.append(len(list(filter(lambda n: n == x1, viborka.tolist())))/elements_number)
 plt.plot(x, num_in_viborka, 'o')
 pmf = my_poisson.pmf(x)
 plt.plot(x, pmf, 'o')
+plt.ylabel('$P(X=x)$')
+plt.xlabel('$x$')
+plt.show()
+
+
+elements_number = 30
+elements = [1, 2, 3, 4, 5, 6]
+probabilities = [1/6, 1/6, 1/6, 1/6, 1/6, 1/6]
+viborka = np.random.choice(elements, elements_number, p=probabilities).tolist()
+distribution = []
+
+for x in elements:
+    distribution.append(len(list(filter(lambda n: n == x, viborka)))/elements_number)
+    
+plt.plot(elements, probabilities, 'o')
+plt.plot(elements, distribution, 'o')
 plt.ylabel('$P(X=x)$')
 plt.xlabel('$x$')
 plt.show()
